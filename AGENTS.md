@@ -20,7 +20,7 @@ data/raw/*.csv → scripts/analysis.py → output/{figures,tables}/ → tex/{pap
 ### Key Components
 
 1. **Data Layer** (`data/`)
-   - `raw/`: Immutable source data (CSV format)
+   - `raw/`: Symlink to external Dropbox folder (`~/Dropbox/research/data`), not tracked in git. Run `make setup-data` to create the symlink.
    - `processed/`: Cleaned/transformed datasets
    - Never modify raw data - transformations go in scripts
 
@@ -71,8 +71,42 @@ def analyze_data(df: pd.DataFrame, column: str) -> Dict[str, float]:
     # Implementation
 ```
 
+### Julia Code Style
+- **lowerCamelCase** for function names: `analyzeData`, `computeStats`
+- **Docstrings** above functions using triple-quote blocks
+- **DataFrames.jl** for data manipulation
+
+Example function pattern:
+```julia
+"""
+    computeStats(df::DataFrame, column::Symbol) -> Dict
+
+Compute summary statistics for a column.
+"""
+function computeStats(df::DataFrame, column::Symbol)
+    # Implementation
+end
+```
+
+### R Code Style
+- **snake_case** for function and variable names: `analyze_data`, `compute_stats`
+- **Roxygen2** docstrings for functions
+- **tidyverse** style conventions
+
+Example function pattern:
+```r
+#' Compute summary statistics for a column
+#'
+#' @param df A data frame
+#' @param column Column name as string
+#' @return Named list with mean, sd, min, max
+compute_stats <- function(df, column) {
+  # Implementation
+}
+```
+
 ### File Naming
-- **Snake_case** for Python files and data files: `analysis_script.py`, `sample_data.csv`
+- **snake_case** for all new files: `analysis_script.jl`, `read_data.R`, `sample_data.csv`
 - **Descriptive names** for outputs: `regression_results.png`, `summary_stats_table.tex`
 - **Date prefixes** for versioned data: `2024_11_data.csv`
 
@@ -83,7 +117,7 @@ def analyze_data(df: pd.DataFrame, column: str) -> Dict[str, float]:
 - **Issues first**: Create issue before starting work, reference in commits
 
 ### LaTeX Conventions
-- **Tables**: Use `booktabs` package. Include via `\input{tables/filename.tex}`, store in `tex/{paper,slides}/tables/`
+- **Tables**: Use `booktabs` and `threeparttable` packages. Include via `\input{tables/filename.tex}`, store in `tex/{paper,slides}/tables/`
 - **Figures**: Include via `\includegraphics{figures/filename.pdf}`, store in `tex/{paper,slides}/figures/`
 - **Bibliography**: BibTeX format in `references.bib`
 - **Slides**: Beamer with `metropolis` or `madrid` theme

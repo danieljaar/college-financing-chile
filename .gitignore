@@ -27,7 +27,8 @@ ENV/
 # Jupyter Notebook
 .ipynb_checkpoints
 
-# Data (keep raw, ignore processed)
+# Data (raw is external via Dropbox symlink, ignore both)
+data/raw/
 data/processed/
 *.tmp
 

@@ -28,9 +28,7 @@ AI_workshop/
 │   └── skills/                   # Agent skills (e.g., YouTube transcript fetcher)
 │
 ├── data/                          # Raw and processed data
-│   ├── raw/                      # Original data files (never modify!)
-│   │   ├── generate_data.py      # Data generation script
-│   │   └── sample_data.csv       # Sample dataset
+│   ├── raw/ -> ~/Dropbox/research/data  # Symlink to external Dropbox folder (not in git)
 │   └── processed/                # Cleaned/transformed data (gitignored)
 │
 ├── scripts/                       # Analysis and processing scripts
@@ -102,7 +100,12 @@ To run the analysis scripts and compile the documents locally:
    pip install -r scripts/requirements.txt
    ```
 
-3. **Run the complete workflow:**
+3. **Create the data symlink** (points `data/raw` to your Dropbox folder):
+   ```bash
+   make setup-data
+   ```
+
+4. **Run the complete workflow:**
    ```bash
    make all
    ```
@@ -118,6 +121,7 @@ To run the analysis scripts and compile the documents locally:
 | `make update-outputs` | Copy analysis outputs to paper/slides directories |
 | `make paper` | Compile research paper PDF |
 | `make slides` | Compile presentation slides |
+| `make setup-data` | Create symlink: `data/raw` -> Dropbox |
 | `make all` | Run complete pipeline |
 | `make clean` | Remove generated files |
 

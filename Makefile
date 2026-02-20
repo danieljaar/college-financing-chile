@@ -1,10 +1,13 @@
 # Makefile for Research Project Template
 # This automates the complete workflow from data analysis to document compilation
 
-.PHONY: all clean data analysis figures tables paper slides cv help update-outputs
+.PHONY: all clean data analysis figures tables paper slides cv help update-outputs setup-data
 
 # Python interpreter
 PYTHON := python3
+
+# External raw data location (Dropbox)
+RAW_DATA_DIR := ~/Dropbox/research/data
 
 # Directories
 DATA_DIR := data
@@ -65,7 +68,15 @@ help:
 	@echo "  make slides    - Compile presentation slides"
 	@echo "  make cv        - Compile CV"
 	@echo "  make clean     - Remove all generated files"
+	@echo "  make setup-data - Create symlink: data/raw -> Dropbox"
 	@echo "  make help      - Show this help message"
+
+# Create symlink from data/raw to external Dropbox folder
+setup-data:
+	@echo "Creating symlink: data/raw -> $(RAW_DATA_DIR)"
+	@mkdir -p data
+	@ln -sfn $(RAW_DATA_DIR) data/raw
+	@echo "Done. Verify with: ls -la data/raw"
 
 # Generate/verify data exists
 data:

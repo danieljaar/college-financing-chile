@@ -36,7 +36,7 @@ data/raw/*.csv → scripts/analysis.py → output/ → tex/{paper,slides}/
 - **Build everything**: Run `make all` from repo root
 
 ## Project Structure
-- `data/raw/`: Original CSV files (committed)
+- `data/raw/`: Symlink to external Dropbox folder (not tracked in git; run `make setup-data`)
 - `scripts/`: Python analysis code
 - `output/`: Generated figures and tables (gitignored, rebuilt)
 - `tex/paper/`: Research paper LaTeX source
